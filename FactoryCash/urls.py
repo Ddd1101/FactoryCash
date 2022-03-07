@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from Register import views as register_view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # 写入
+    path('add_item/', register_view.addItem),
 ]
