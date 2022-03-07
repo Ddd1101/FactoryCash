@@ -22,5 +22,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # 写入
-    path('add_item/', register_view.addItem),
+    path('addItem/', register_view.addItem),
+    # 删除
+    path('delItem/', register_view.delItem),
+    # 改
+
+    # 查
+    path('getItemsByNum/', register_view.getItemsByNum),
+    path('getItems/',      register_view.getItems),
 ]

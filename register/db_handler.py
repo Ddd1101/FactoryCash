@@ -11,14 +11,32 @@ from django.forms.models import model_to_dict
 
 import datetime
 
-
+# 增
 def addItem(request):
     data = json.loads((request.body).decode("utf-8"))
     res = Item.objects.create(**data)
 
     return (res)
 
-def getItem(request):
+# 删
+def delItem(request):
+    data = json.loads((request.body).decode("utf-8"))
+    res = Item.objects.filter(created__contains=datetime.date(data['year'], data['month'], data['day']), customer = data['customer'], num = data['num']).delete()
+    return res
+
+# 改
+def updateItem(request):
+    data = json.loads((request.body).decode("utf-8"))
+    res = Item.objects.filter(created__contains=datetime.date(data['year'], data['month'], data['day']), customer = data['customer'], num = data['num'], ).update()
+    return res
+
+# 查
+def getItemsByNum(request):
     data = json.loads((request.body).decode("utf-8"))
 
-    res = list(Item.objects.filter(created__contains=datetime.date(2022, 3, 7), num = 1).values()) #根据日期包含查询
+    res = list(Item.objects.filter(created__contains=datetime.date(data['year'], data['month'], data['day']), customer = data['customer'], num = data['num']).values()) #根据日期包含查询
+
+def getItems(request):
+    data = json.loads((request.body).decode("utf-8"))
+
+    res = list(Item.objects.filter(created__contains=datetime.date(data['year'], data['month'], data['day']), customer = data['customer']).values()) #根据日期包含查询
