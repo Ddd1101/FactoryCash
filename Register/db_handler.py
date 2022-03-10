@@ -14,7 +14,15 @@ import datetime
 # 增
 def addItem(request):
     data = json.loads((request.body).decode("utf-8"))
+    print(data)
     res = Item.objects.create(**data)
+
+    return (res)
+
+def addData(request):
+    data = json.loads((request.body).decode("utf-8"))
+    res = Item.objects.create(**data)
+    res = {};
 
     return (res)
 

@@ -16,6 +16,11 @@ def addItem(request):
     return JsonResponse(200, safe=False)
 
 @require_POST
+def addData(request):
+    res = db_handler.addData(request)
+    return JsonResponse(200, safe=False)
+
+@require_POST
 def delItem(request):
     res = db_handler.delItem(request)
     return JsonResponse(200, safe=False)

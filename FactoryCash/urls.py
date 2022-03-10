@@ -23,6 +23,7 @@ urlpatterns = [
 
     # 写入
     path('addItem/', register_view.addItem),
+    path('addData/', register_view.addData),
     # 删除
     path('delItem/', register_view.delItem),
     # 改

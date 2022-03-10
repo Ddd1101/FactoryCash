@@ -5,6 +5,7 @@
 		<meta charset="UTF-8">
 		<title></title>
         <script type="text/javascript" src="index.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	</head>
 
 	<body>
@@ -21,7 +22,7 @@
                 <tbody>
                     <tr>
                         <td>吊带背心</td>
-                        <td>均码</td>
+                        <td>均价</td>
                         <td name="diaodaibeixin_p" value="4.5">4.5</td>
                         <td><input type="text" value="0" name="diaodaibeixin" text="0" style="float:right"></td>
                     </tr>
@@ -73,7 +74,7 @@
                         <td><input type="text" value="0" name="lamao" text="0"></td>
                     </tr>
                     <tr>
-                        <td rowspan="7">小童套装</td>
+                        <td rowspan="7">小童拉毛裤</td>
                         <td>90</td>
                         <td name="lamaotongku_90_p" value="">7</td>
                         <td><input type="text" value="0" name="lamaotongku_90" text="0"></td>
@@ -110,7 +111,7 @@
                     </tr>
                     <tr>
                         <td>宽肩背心</td>
-                        <td>均码</td>
+                        <td>均价</td>
                         <td name="diaodai_90_p" value="3.7">3.7</td>
                         <td><input type="text" value="0" name="diaodai_90" text="0"></td>
                     </tr>
@@ -121,8 +122,33 @@
             <input type="submit" value="计算" onclick="return CalculateSum();">__货款总额_ : <textarea name="sumPrice" readonly="readonly" style="font-size: 20px; color: red; height: 24px;">0</textarea>
             <br><br>
             <input type="submit" value="表格清空" onclick="return true;">
+            <br><br>
+            <button type="button" id="saveData" >保存结果</button>
         </form>
 	</body>
-    
-    
+    <script>
+        $(function() {   
+            $("#saveData").click(function() {   
+                $.ajax({   
+                    //要用post方式   
+                    type: "Post",   
+                    //方法所在页面和方法名   
+                    url: "127.0.0.1:8000/addData/",   
+                    contentType: "application/json; charset=utf-8",   
+                    dataType: "json",   
+                    success: function(data) {   
+                        //返回的数据用data.d获取内容   
+                        alert(data.d);   
+                    },   
+                    error: function(err) {   
+                        alert(err);   
+                    }   
+                });   
+
+                //禁用按钮的提交   
+                return false;   
+    });   
+});
+
+    </script>
 </html>
