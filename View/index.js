@@ -4,6 +4,7 @@ var _sum = 0;
 
 function CalculateSum(){
     str = "日期 ：" + $('#date_info').val() + "\n";
+    str = str + "客户 ： " + $('#customers option:selected').val() + "\n"
     _table = document.getElementById("tb1");
     
     _sum = 0;
