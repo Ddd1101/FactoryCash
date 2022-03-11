@@ -15,8 +15,8 @@
         <br><br>
 
         客户：
-        <select style="font-size: 20px;font-weight:bold;">
-            <option id="customer" value="小眉" selected="selected">小眉</option>
+        <select id="customers" style="font-size: 20px;font-weight:bold;">
+            <option  value="小眉" selected="selected">小眉</option>
           </select>
 
           <br><br>
@@ -136,31 +136,6 @@
             <button type="button" id="saveData" >保存结果</button>
         </form>
 	</body>
-    <!-- <script>
-        $(function() {   
-            $("#saveData").click(function() {   
-                $.ajax({   
-                    //要用post方式   
-                    type: "Post",   
-                    //方法所在页面和方法名   
-                    url: "127.0.0.1:8000/addData/",   
-                    contentType: "application/json; charset=utf-8",   
-                    dataType: "json",   
-                    success: function(data) {   
-                        //返回的数据用data.d获取内容   
-                        alert(data.d);   
-                    },   
-                    error: function(err) {   
-                        alert(err);   
-                    }   
-                });   
-
-                //禁用按钮的提交   
-                return false;   
-    });   
-});
-
-    </script> -->
 
     <script>
         $(document).ready(function () {
@@ -170,5 +145,10 @@
             var today = time.getFullYear() + "-" + (month) + "-" + (day);
             $('#date_info').val(today);
         })
+
+        var btn = document.getElementById("saveData");
+        btn.addEventListener('click',function(){
+            saveFile();
+        },false)
     </script>
 </html>

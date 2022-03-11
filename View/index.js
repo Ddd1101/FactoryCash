@@ -1,19 +1,32 @@
+var str = "";
 
 function CalculateSum(){
+    str = "日期 ：" + $('#date_info').val() + "\n";
     _table = document.getElementById("tb1");
     
     _sum = 0;
 
     for(var i = 1; i < _table.rows.length; ++i){
         if(_table.rows[i].cells.length == 4){
+            str += "\n-------------------------------------------------\n";
+            str = str + "品名 ： " + _table.rows[i].cells[0].innerHTML + "\n";
             _sum += _table.rows[i].cells[1].innerHTML * _table.rows[i].cells[3].childNodes[0].value;
+            if( _table.rows[i].cells[3].childNodes[0].value != ""){
+                str = str + _table.rows[i].cells[2].innerHTML + ": " + _table.rows[i].cells[3].childNodes[0].value + "\n";
+            }else{
+                str = str + _table.rows[i].cells[2].innerHTML + ": 0 \n";
+            }
         }else{
-            _sum += _table.rows[i].cells[0].innerHTML * _table.rows[i].cells[2].childNodes[0].value
+            _sum += _table.rows[i].cells[0].innerHTML * _table.rows[i].cells[2].childNodes[0].value;
+            if( _table.rows[i].cells[2].childNodes[0].value != ""){
+                str = str + _table.rows[i].cells[1].innerHTML + ": " + _table.rows[i].cells[2].childNodes[0].value + "\n";
+            }else{
+                str = str + _table.rows[i].cells[1].innerHTML + ": 0 \n";
+            }
         }
     }
 
     document.forms["products"]["sumPrice"].value = _sum;
-    var thisTime = getCurrentTime();
     
     
     return false;
@@ -23,32 +36,34 @@ function ReLoadPage(){
     window.location.replace("http://ddd1101.github.io/FactoryCash/View/")
 }
 
-/**
- * 获取当前时间 格式：yyyy-MM-dd HH:MM:SS
- */
- function getCurrentTime() {
-    var date = new Date();//当前时间
-    var month = zeroFill(date.getMonth() + 1);//月
-    var day = zeroFill(date.getDate());//日
-    var hour = zeroFill(date.getHours());//时
-    var minute = zeroFill(date.getMinutes());//分
-    var second = zeroFill(date.getSeconds());//秒
-    
-    //当前时间
-    var curTime = date.getFullYear() + "-" + month + "-" + day
-            + " " + hour + ":" + minute + ":" + second;
-    
-    return curTime;
+
+////////////////// 保存txt
+
+
+
+function fakeClick(obj) { 
+    var ev = document.createEvent("MouseEvents");
+    ev.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    obj.dispatchEvent(ev);
 }
- 
-/**
- * 补零
- */
-function zeroFill(i){
-    if (i >= 0 && i <= 9) {
-        return "0" + i;
-    } else {
-        return i;
+
+function exportRaw(name, data) {
+    var urlObject = window.URL || window.webkitURL || window;
+    var export_blob = new Blob([data]);
+    var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
+    save_link.href = urlObject.createObjectURL(export_blob);
+    save_link.download = name;
+    fakeClick(save_link);
+}
+
+function saveFile(){
+    var fileName  = $('#date_info').val() + "_" + $('#customers option:selected').val();
+    str += "\n-------------------------------------------------\n";
+    str = str + "\n __货款总额__ : " + document.forms["products"]["sumPrice"].value + " 元"
+    if(str === ""){
+        alert("无计算结果");
+    }else{
+        exportRaw(fileName, str);
     }
 }
 
