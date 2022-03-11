@@ -6,10 +6,13 @@
 		<title></title>
         <script type="text/javascript" src="index.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="index.css">
 	</head>
 
 	<body>
-        日期：<textarea id="thisTime"  style="font-size: 20px; height: 24px;">0</textarea>
+        <input id="date_info" type="date" style="font-size: 20px;font-weight:bold;">
+
+        <br><br>
 
         <form id='products' action="" name= "products" method="">
             <table id="tb1" border="1" style="text-align: center;">
@@ -126,7 +129,7 @@
             <button type="button" id="saveData" >保存结果</button>
         </form>
 	</body>
-    <script>
+    <!-- <script>
         $(function() {   
             $("#saveData").click(function() {   
                 $.ajax({   
@@ -150,5 +153,15 @@
     });   
 });
 
+    </script> -->
+
+    <script>
+        $(document).ready(function () {
+            var time = new Date();
+            var day = ("0" + time.getDate()).slice(-2);
+            var month = ("0" + (time.getMonth() + 1)).slice(-2);
+            var today = time.getFullYear() + "-" + (month) + "-" + (day);
+            $('#date_info').val(today);
+        })
     </script>
 </html>
