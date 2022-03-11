@@ -13,7 +13,7 @@ from .models import *
 @require_POST
 def addItem(request):
     res = db_handler.addItem(request)
-    return JsonResponse(200, safe=False)
+    return JsonResponse(res, safe=False)
 
 @require_POST
 def addData(request):

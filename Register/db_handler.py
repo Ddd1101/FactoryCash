@@ -15,9 +15,9 @@ import datetime
 def addItem(request):
     data = json.loads((request.body).decode("utf-8"))
     print(data)
-    res = Item.objects.create(**data)
+    # res = Item.objects.create(**data)
 
-    return (res)
+    return (data)
 
 def addData(request):
     data = json.loads((request.body).decode("utf-8"))
