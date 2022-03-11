@@ -1,5 +1,7 @@
 var str = "";
 
+var _sum = 0;
+
 function CalculateSum(){
     str = "日期 ：" + $('#date_info').val() + "\n";
     _table = document.getElementById("tb1");
@@ -60,7 +62,7 @@ function saveFile(){
     var fileName  = $('#date_info').val() + "_" + $('#customers option:selected').val();
     str += "\n-------------------------------------------------\n";
     str = str + "\n __货款总额__ : " + document.forms["products"]["sumPrice"].value + " 元"
-    if(str === ""){
+    if(str === "" || _sum == 0){
         alert("无计算结果");
     }else{
         exportRaw(fileName, str);
